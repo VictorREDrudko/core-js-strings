@@ -158,8 +158,12 @@ function repeatString(value, count) {
  *   removeFirstOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
 function removeFirstOccurrences(str, value) {
-  const newStr = str.replace(value, '');
-  return newStr;
+  const firstIndex = str.indexOf(value);
+  if (firstIndex === -1) {
+    return str;
+  }
+  const res = str.slice(0, firstIndex) + str.slice(firstIndex + value.length);
+  return res;
 }
 
 /**
@@ -174,8 +178,13 @@ function removeFirstOccurrences(str, value) {
  *   removeLastOccurrences('I like legends', 'end') => 'I like legs'.
  *   removeLastOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
-function removeLastOccurrences(/* str, value */) {
-  throw new Error('Not implemented');
+function removeLastOccurrences(str, value) {
+  const lastIndex = str.lastIndexOf(value);
+  if (lastIndex === -1) {
+    return str;
+  }
+  const res = str.slice(0, lastIndex) + str.slice(lastIndex + value.length);
+  return res;
 }
 
 /**
@@ -190,8 +199,20 @@ function removeLastOccurrences(/* str, value */) {
  *   sumOfCodes('') => 0
  *   sumOfCodes() => 0
  */
-function sumOfCodes(/* str */) {
-  throw new Error('Not implemented');
+function sumOfCodes(str) {
+  if (!str) {
+    return 0;
+  }
+  const arr = str.split('');
+  const arrCode = [];
+  arr.forEach((el) => {
+    const cod = el.codePointAt(0);
+    arrCode.push(cod);
+  });
+  const res = arrCode.reduce((sum, el) => {
+    return sum + el;
+  }, 0);
+  return res;
 }
 
 /**
